@@ -1,0 +1,150 @@
+<div class="card">
+    <div class="card-content">
+        <div class="card-header">
+            <h5 class="card-title">Formulario: {{(user.id > 0)? 'Actualizar':
+                'Crear'}} Usuario</h5>
+        </div>
+        <div class="card-body">
+            <form (ngSubmit)="onSubmit(userForm)" #userForm="ngForm">
+
+                <div>
+                    <input
+                        placeholder="Name*"
+                        name="name"
+                        [(ngModel)]="user.name"
+                        class="form-control my-2"
+                        required
+                        #name="ngModel">
+
+                    @if (name.invalid && (name.dirty || name.touched)) {
+                    @if (name.errors!['required']){
+
+                    <div class="text text-danger">
+                        Campo requerido
+                    </div>
+                    }
+                    }
+
+                </div>
+                <div>
+                    <input
+                        placeholder="Apellido*"
+                        name="lastname"
+                        [(ngModel)]="user.lastname"
+                        class="form-control my-2"
+                        required
+                        #lastname="ngModel">
+
+                    @if (lastname.invalid && (lastname.dirty ||
+                    lastname.touched)) {
+                    @if (lastname.errors!['required']){
+
+                    <div class="text text-danger">
+                        Campo requerido
+                    </div>
+                    }
+                    }
+
+                </div>
+                <div>
+                    <input
+                        placeholder="Email*"
+                        type="email"
+                        name="email"
+                        [(ngModel)]="user.email"
+                        class="form-control my-2"
+                        required
+                        email
+                        #email="ngModel">
+
+                    @if (email.invalid && (email.dirty || email.touched)) {
+                    @if (email.errors!['required']){
+
+                    <div class="text text-danger">
+                        Campo requerido
+                    </div>
+                    }
+                    @if (email.errors!['email']) {
+                    <div class="text text-danger">
+                        El campo debe tener el formato correcto
+                    </div>
+                    }
+
+                    }
+
+                </div>
+                <div>
+                    <input
+                        placeholder="Usuario*"
+                        name="username"
+                        [(ngModel)]="user.username"
+                        class="form-control my-2"
+                        required
+                        minlength="8"
+                        #username="ngModel">
+
+                    @if (username.invalid && (username.dirty ||
+                    username.touched)) {
+                    @if (username.errors!['required']){
+
+                    <div class="text text-danger">
+                        Campo requerido
+                    </div>
+                    }
+                    @if (username.errors!['minlength']) {
+                    <div class="text text-danger">
+                        El campo debe contener al menos 8 caracteres.
+                    </div>
+                    }
+                    }
+
+                </div>
+                <div>
+                    <input
+                        placeholder="Contraseña*"
+                        type="password"
+                        name="password"
+                        [(ngModel)]="user.password"
+                        class="form-control my-2"
+                        required
+                        minlength="6"
+                        #password="ngModel">
+
+                    @if (password.invalid && (password.dirty ||
+                    password.touched)) {
+                    @if (password.errors!['required']){
+
+                    <div class="text text-danger">
+                        Campo requerido
+                    </div>
+                    }
+                    @if (username.errors!['minlength']) {
+                    <div class="text text-danger">
+                        El campo debe contener al menos 6 caracteres.
+                    </div>
+                    }
+                    }
+
+                </div>
+
+                <div>
+                    <button
+                        type="submit"
+                        class="btn btn-primary my-2"
+                        [disabled]="userForm.invalid">
+                        {{(user.id > 0)? 'Actualizar': 'Crear'}}
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary mx-2"
+                        (click)="onClear(userForm)">
+                        Limpiar
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
