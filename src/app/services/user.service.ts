@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
-import { Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -14,8 +14,12 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  findAll(): Observable<User[]>{
+  findAll(): Observable<User[]> {
     return this.http.get<User[]>(this.url);
+  }
+
+  findAllPageable(page: number): Observable<any> {
+    return this.http.get<any>(`${this.url}/page/${page}`);
   }
 
   findById(id: number): Observable<User> {
@@ -26,11 +30,11 @@ export class UserService {
     return this.http.post<User>(this.url, user);
   }
 
-  update(user: User): Observable<User>{
+  update(user: User): Observable<User> {
     return this.http.put<User>(`${this.url}/${user.id}`, user);
   }
 
-  delete(id:number):Observable<void>{
+  delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.url}/${id}`);
   }
 

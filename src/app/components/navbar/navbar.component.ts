@@ -12,4 +12,7 @@ export class NavbarComponent {
 
 @Input() users: User[] = [];
 
+
+@Input() paginator = {};
+
 }
