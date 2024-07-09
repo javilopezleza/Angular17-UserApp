@@ -7,17 +7,19 @@
         <div class="card-body">
             <form (ngSubmit)="onSubmit(userForm)" #userForm="ngForm">
 
-                <div>
+                <div class="form-group">
+                    <label class="form-label my-1" for="name">Nombre</label>
                     <input
+                        id="name"
                         placeholder="Name*"
                         name="name"
                         [(ngModel)]="user.name"
-                        class="form-control my-2"
+                        class="form-control my-1"
                         #name="ngModel">
                     <!-- required -->
 
                     @if (errors.name) {
-                        <div class="text-danger">{{errors.name}}</div>
+                    <div class="text-danger">{{errors.name}}</div>
                     }
                     <!-- @if (name.invalid && (name.dirty || name.touched)) {
                     @if (name.errors!['required']){
@@ -29,17 +31,19 @@
                     } -->
 
                 </div>
-                <div>
+                <div class="form-group">
+                    <label class="form-label my-1" for="lastname">Apellidos </label>
                     <input
+                        id="lastname"
                         placeholder="Apellido*"
                         name="lastname"
                         [(ngModel)]="user.lastname"
-                        class="form-control my-2"
+                        class="form-control my-1"
                         #lastname="ngModel">
                     <!-- required -->
 
                     @if (errors.lastname) {
-                        <div class="text-danger">{{errors.lastname}}</div>
+                    <div class="text-danger">{{errors.lastname}}</div>
                     }
 
                     <!-- @if (lastname.invalid && (lastname.dirty ||
@@ -53,20 +57,21 @@
                     } -->
 
                 </div>
-                <div>
+                <div class="form-group">
+                    <label class="form-label my-1" for="email">Email </label>
                     <input
+                        id="email"
                         placeholder="Email*"
                         type="email"
                         name="email"
                         [(ngModel)]="user.email"
-                        class="form-control my-2"
+                        class="form-control my-1"
                         #email="ngModel">
                     <!-- required email -->
 
                     @if (errors.email) {
-                        <div class="text-danger">{{errors.email}}</div>
+                    <div class="text-danger">{{errors.email}}</div>
                     }
-
 
                     <!-- @if (email.invalid && (email.dirty || email.touched)) {
                     @if (email.errors!['required']){
@@ -84,20 +89,21 @@
                     } -->
 
                 </div>
-                <div>
+                <div class="form-group">
+                    <label class="form-label my-1" for="username">Username </label>
                     <input
+                        id="username"
                         placeholder="Usuario*"
                         name="username"
                         [(ngModel)]="user.username"
-                        class="form-control my-2"
+                        class="form-control my-1"
                         #username="ngModel">
                     <!-- required minlength="8" -->
                     @if (errors.username) {
-                        <div class="text-danger">{{errors.username}}</div>
+                    <div class="text-danger">{{errors.username}}</div>
                     }
 
-
-<!-- 
+                    <!-- 
                     @if (username.invalid && (username.dirty ||
                     username.touched)) {
                     @if (username.errors!['required']){
@@ -114,18 +120,22 @@
                     } -->
 
                 </div>
-                <div>
+                @if (user.id == 0){
+
+                <div class="form-group">
+                    <label class="form-label my-1" for="password">Password </label>
                     <input
+                        id="password"
                         placeholder="Contraseña*"
                         type="password"
                         name="password"
                         [(ngModel)]="user.password"
-                        class="form-control my-2"
+                        class="form-control my-1"
                         #password="ngModel">
                     <!-- required  minlength="6"-->
 
                     @if (errors.password) {
-                        <div class="text-danger">{{errors.password}}</div>
+                    <div class="text-danger">{{errors.password}}</div>
                     }
 
                     <!-- @if (password.invalid && (password.dirty ||
@@ -144,11 +154,12 @@
                     } -->
 
                 </div>
+                }
 
-                <div>
+                <div class="form-group">
                     <button
                         type="submit"
-                        class="btn btn-primary my-2">
+                        class="btn btn-primary my-1">
                         <!-- [disabled]="userForm.invalid"> -->
                         {{(user.id > 0)? 'Actualizar': 'Crear'}}
                     </button>

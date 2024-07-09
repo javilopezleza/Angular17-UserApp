@@ -1,7 +1,9 @@
 <h3> {{title}} </h3>
 
-<button class="btn btn-primary my-3" [routerLink]="['/users/create']" >  Crear Usuario </button>
-
+@if(admin){
+<button class="btn btn-primary my-3" [routerLink]="['/users/create']"> Crear
+    Usuario </button>
+}
 
 @if (users.length == 0) {
 <div class="alert alert-warning">No hay usuarios en el sistema</div>
@@ -14,8 +16,10 @@
             <th>Apellido</th>
             <th>Email</th>
             <th>Usuario</th>
+            @if(admin){
             <th>Eliminar</th>
             <th>Actualizar</th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -26,6 +30,7 @@
             <td> {{user.lastname}} </td>
             <td> {{user.email}} </td>
             <td> {{user.username}} </td>
+            @if(admin){
             <td>
                 <button
                     class="btn btn-danger btn-sm"
@@ -40,10 +45,11 @@
                     Actualizar
                 </button>
             </td>
+            }
         </tr>
         }
     </tbody>
 </table>
 }
 
-<paginator [paginator]="paginator" [url]="'/users/page'"/>
+<paginator [paginator]="paginator" [url]="'/users/page'" />
