@@ -21,7 +21,7 @@ export class UsersEffects {
 
                         return findAllPageable({ users, paginator });
                     }),
-                    catchError(() => EMPTY)
+                    catchError((error) => of(error))
                 )
             )
         )
@@ -33,7 +33,7 @@ export class UsersEffects {
             exhaustMap(action => this.service.create(action.userNew)
                 .pipe(
                     map(userNew => addSuccess({ userNew })),
-                    catchError(error => (error.status == 400) ? of(setErrors({ errors: error.error })) : EMPTY
+                    catchError(error => (error.status == 400) ? of(setErrors({ userForm: action.userNew, errors: error.error })) : of(error)
                     )
                 )
             )
@@ -46,7 +46,7 @@ export class UsersEffects {
             exhaustMap(action => this.service.update(action.userUpdated)
                 .pipe(
                     map(userUpdated => updateSuccess({ userUpdated })),
-                    catchError(error => (error.status == 400) ? of(setErrors({ errors: error.error })) : EMPTY
+                    catchError(error => (error.status == 400) ? of(setErrors({ userForm: action.userUpdated, errors: error.error })) : of(error)
                     )
                 )
             )
@@ -58,9 +58,7 @@ export class UsersEffects {
             ofType(remove),
             exhaustMap(action => this.service.delete(action.id)
                 .pipe(
-                    map(id => removeSuccess({ id })),
-                    catchError(error => (error.status == 400) ? of(setErrors({ errors: error.error })) : EMPTY
-                    )
+                    map(() => removeSuccess({ id: action.id }))
                 )
             )
         )
@@ -100,7 +98,7 @@ export class UsersEffects {
                 title: "Eliminado!",
                 text: "El usuario ha sido eliminado.",
                 icon: "success"
-              });
+            });
         })
     ), { dispatch: false })
 
